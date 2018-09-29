@@ -1605,13 +1605,14 @@ static void msm_quin_mi2s_snd_shutdown(struct snd_pcm_substream *substream)
 	}
 }
 
-static void *def_msm8952_wcd_mbhc_cal(void)
+#ifdef CONFIG_PROJECT_VINCE
+static void *def_msm8952_wcd_mbhc_cal (void)
 {
 	void *msm8952_wcd_cal;
 	struct wcd_mbhc_btn_detect_cfg *btn_cfg;
 	u16 *btn_low, *btn_high;
 
-	msm8952_wcd_cal = kzalloc(WCD_MBHC_CAL_SIZE(WCD_MBHC_DEF_BUTTONS,
+	msm8952_wcd_cal = kzalloc (WCD_MBHC_CAL_SIZE (WCD_MBHC_DEF_BUTTONS,
 				WCD_MBHC_DEF_RLOADS), GFP_KERNEL);
 	if (!msm8952_wcd_cal)
 		return NULL;
@@ -1619,15 +1620,15 @@ static void *def_msm8952_wcd_mbhc_cal(void)
 #define S(X, Y) ((WCD_MBHC_CAL_PLUG_TYPE_PTR(msm8952_wcd_cal)->X) = (Y))
 	S(v_hs_max, 1500);
 #undef S
-#define S(X, Y) ((WCD_MBHC_CAL_BTN_DET_PTR(msm8952_wcd_cal)->X) = (Y))
+#define S(X, Y) ((WCD_MBHC_CAL_BTN_DET_PTR (msm8952_wcd_cal)->X) = (Y))
 	S(num_btn, WCD_MBHC_DEF_BUTTONS);
 #undef S
 
 
-	btn_cfg = WCD_MBHC_CAL_BTN_DET_PTR(msm8952_wcd_cal);
+	btn_cfg = WCD_MBHC_CAL_BTN_DET_PTR (msm8952_wcd_cal);
 	btn_low = btn_cfg->_v_btn_low;
 	btn_high = ((void *)&btn_cfg->_v_btn_low) +
-		(sizeof(btn_cfg->_v_btn_low[0]) * btn_cfg->num_btn);
+		 (sizeof (btn_cfg->_v_btn_low[0]) * btn_cfg->num_btn);
 
 	/*
 	 * In SW we are maintaining two sets of threshold register
@@ -1640,32 +1641,71 @@ static void *def_msm8952_wcd_mbhc_cal(void)
 	 * 210-290 == Button 2
 	 * 360-680 == Button 3
 	 */
-	#if defined(CONFIG_MBHC_UART)
-	btn_low[0] = 177;
-	btn_high[0] = 277;
-	btn_low[1] = 206;
-	btn_high[1] = 437;
-	btn_low[2] = 243;
-	btn_high[2] = 612;
-	btn_low[3] = 243;
-	btn_high[3] = 612;
-	btn_low[4] = 243;
-	btn_high[4] = 612;
-	#else
-	btn_low[0] = 91;
-	btn_high[0] = 91;
-	btn_low[1] = 259;
-	btn_high[1] = 259;
-	btn_low[2] = 488;
-	btn_high[2] = 488;
-	btn_low[3] = 488;
-	btn_high[3] = 488;
-	btn_low[4] = 488;
-	btn_high[4] = 488;
-	#endif
-
+	/*
+	btn_low[0] = 75;
+	btn_high[0] = 75;
+	btn_low[1] = 150;
+	btn_high[1] = 150;
+	btn_low[2] = 225;
+	btn_high[2] = 225;
+	btn_low[3] = 450;
+	btn_high[3] = 450;
+	btn_low[4] = 500;
+	btn_high[4] = 500;
+	*/
 	return msm8952_wcd_cal;
 }
+#else
+static void *def_msm8952_wcd_mbhc_cal (void)
+{
+	void *msm8952_wcd_cal;
+	struct wcd_mbhc_btn_detect_cfg *btn_cfg;
+	u16 *btn_low, *btn_high;
+
+	msm8952_wcd_cal = kzalloc (WCD_MBHC_CAL_SIZE (WCD_MBHC_DEF_BUTTONS,
+				WCD_MBHC_DEF_RLOADS), GFP_KERNEL);
+	if (!msm8952_wcd_cal)
+		return NULL;
+
+#define S(X, Y) ((WCD_MBHC_CAL_PLUG_TYPE_PTR (msm8952_wcd_cal)->X) = (Y))
+	S(v_hs_max, 1600);
+#undef S
+#define S(X, Y) ((WCD_MBHC_CAL_BTN_DET_PTR (msm8952_wcd_cal)->X) = (Y))
+	S (num_btn, WCD_MBHC_DEF_BUTTONS);
+#undef S
+
+
+	btn_cfg = WCD_MBHC_CAL_BTN_DET_PTR (msm8952_wcd_cal);
+	btn_low = btn_cfg->_v_btn_low;
+	btn_high = ((void *)&btn_cfg->_v_btn_low) +
+		 (sizeof (btn_cfg->_v_btn_low[0]) * btn_cfg->num_btn);
+
+	/*
+	 * In SW we are maintaining two sets of threshold register
+	 * one for current source and another for Micbias.
+	 * all btn_low corresponds to threshold for current source
+	 * all bt_high corresponds to threshold for Micbias
+	 * Below thresholds are based on following resistances
+	 * 0-70    == Button 0
+	 * 110-180 == Button 1
+	 * 210-290 == Button 2
+	 * 360-680 == Button 3
+	 */
+	/*
+	btn_low[0] = 75;
+	btn_high[0] = 75;
+	btn_low[1] = 150;
+	btn_high[1] = 150;
+	btn_low[2] = 225;
+	btn_high[2] = 225;
+	btn_low[3] = 450;
+	btn_high[3] = 450;
+	btn_low[4] = 500;
+	btn_high[4] = 500;
+	*/
+	return msm8952_wcd_cal;
+}
+#endif
 
 static int msm_audrx_init(struct snd_soc_pcm_runtime *rtd)
 {
