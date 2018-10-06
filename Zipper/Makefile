@@ -3,7 +3,7 @@ NAME ?= GenomKernel
 
 DATE := $(shell date "+%Y%m%d-%I%M")
 
-CODE := MIUI
+CODE := Pie-RebaseV2
 
 ZIP := $(NAME)-$(CODE)-$(DATE).zip
 CZIP := $(NAME)-$(CODE)-Clang-$(DATE).zip
