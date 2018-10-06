@@ -1184,6 +1184,14 @@ config TOUCHSCREEN_HIMAX_CHIPSET
 
           If unsure, say N.
 
+config TOUCHSCREEN_NT36672
+	bool "Novatek NT36672"
+	default y
+	help
+	  Say Y here if you have a Novatek NT36672 touchscreen connected
+	  to your system.
+ 	  If unsure, say N.
+
 source "drivers/input/touchscreen/hxchipset/Kconfig"
 
 endif
