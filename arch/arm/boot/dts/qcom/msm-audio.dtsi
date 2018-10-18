@@ -233,11 +233,6 @@
 			qcom,msm-dai-q6-dev-id = <240>;
 		};
 
-		afe_loopback_tx: qcom,msm-dai-q6-afe-loopback-tx {
-			compatible = "qcom,msm-dai-q6-dev";
-			qcom,msm-dai-q6-dev-id = <24577>;
-		};
-
 		incall_record_rx: qcom,msm-dai-q6-incall-record-rx {
 			compatible = "qcom,msm-dai-q6-dev";
 			qcom,msm-dai-q6-dev-id = <32771>;
@@ -540,19 +535,6 @@
 	};
 
 	i2c@78b6000 {
-		status = "okay";
-		spkamp@3a {/* max98927 smartpa device*/
-			compatible = "maxim,max98927L";
-			status = "okay";
-			reg = <0x3a>;
-			mono_stereo_mode = <0>;
-			interleave_mode = <0>;
-			vmon-l-slot = <1>;
-			imon-l-slot = <1>;
-			vmon-r-slot = <1>;
-			imon-r-slot = <1>;
-			maxim,98927-reset-gpio = <&tlmm 89 0>;
-		};
 		wsa881x_i2c_e: wsa881x-i2c-codec@e {
 			status = "disabled";
 			compatible = "qcom,wsa881x-i2c-codec";
