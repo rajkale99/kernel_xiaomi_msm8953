@@ -1,4 +1,5 @@
-CONFIG_LOCALVERSION="-GenomKernel-Pie-RebaseV2"
+CONFIG_LOCALVERSION="-Genom-Android-9.0-Inline"
+# CONFIG_LOCALVERSION_AUTO is not set
 # CONFIG_USELIB is not set
 CONFIG_AUDIT=y
 CONFIG_NO_HZ=y

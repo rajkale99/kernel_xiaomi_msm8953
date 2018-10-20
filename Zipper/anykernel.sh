@@ -4,7 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=Genom Kernel for MIUI ROMs
+kernel.string=Genom Kernel for Redmi 5 Plus
 do.devicecheck=1
 do.modules=0
 do.cleanup=1
