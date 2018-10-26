@@ -397,6 +397,14 @@
 			29 01 00 00 00 00 2C CA 1C FC FC FC 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 		];
 
+		cm,mdss-livedisplay-cabc-cmd = [
+			15 01 00 00 00 00 02 55 00
+		];
+
+		cm,mdss-livedisplay-cabc-ui-value = <0x01>;
+		cm,mdss-livedisplay-cabc-image-value = <0x02>;
+		cm,mdss-livedisplay-cabc-video-value = <0x03>;
+
 		qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
 		qcom,mdss-dsi-off-command-state = "dsi_hs_mode";
 		qcom,mdss-dsi-CABC_on-command-state = "dsi_lp_mode";
