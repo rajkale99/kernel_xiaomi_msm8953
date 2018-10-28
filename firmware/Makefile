@@ -28,6 +28,7 @@ acenic-objs := acenic/tg1.bin acenic/tg2.bin
 endif
 fw-shipped-$(CONFIG_TOUCHSCREEN_TD4310_E7) += synaptics/startup_fw_update.img
 fw-shipped-$(CONFIG_TOUCHSCREEN_TD4310_LANSI_E7) += synaptics/startup_fw_update_lansi.img
+fw-shipped-$(CONFIG_TOUCHSCREEN_NT36672) += NVT_huaxing/novatek_ts_fw.bin
 fw-shipped-$(CONFIG_ACENIC) += $(acenic-objs)	
 fw-shipped-$(CONFIG_ACENIC) += $(acenic-objs)
 fw-shipped-$(CONFIG_ADAPTEC_STARFIRE) += adaptec/starfire_rx.bin \
